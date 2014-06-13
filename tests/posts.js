@@ -2,6 +2,7 @@
 var assert = require('assert');
 
 suite('Posts', function() {
+
   test('in the server', function(done, server) {
     server.eval(function() {
       Posts.insert({title: 'hello title'});
@@ -24,7 +25,9 @@ suite('Posts', function() {
       function addedNewPost(post) {
         emit('post', post);
       }
-    }).once('post', function(post) {
+    });
+
+    server.once('post', function(post) {
       assert.equal(post.title, 'hello title');
       done();
     });
