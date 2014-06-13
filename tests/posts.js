@@ -2,7 +2,6 @@
 var assert = require('assert');
 
 suite('Posts', function() {
-/*
   test('in the server', function(done, server) {
     server.eval(function() {
       Posts.insert({title: 'hello title'});
@@ -15,8 +14,7 @@ suite('Posts', function() {
       done();
     });
   });
-*/
-/*
+
   test('using both client and the server', function(done, server, client) {
     server.eval(function() {
       Posts.find().observe({
@@ -37,7 +35,6 @@ suite('Posts', function() {
       Posts.insert({title: 'hello title'});
     });
   });
-*/
 
   test('using two clients', function(done, server, c1, c2) {
     c1.eval(function() {
@@ -50,14 +47,14 @@ suite('Posts', function() {
       }
       emit('done');
     }).once('post', function(post) {
-      assert.equal(post.title, 'from c2');
+      assert.equal(post.title, 'hello title');
       done();
     }).once('done', function() {
       c2.eval(insertPost);
     });
 
     function insertPost() {
-      Posts.insert({title: 'from c2'});
+      Posts.insert({title: 'hello title'});
     }
   });
 });
